@@ -4,6 +4,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from '@src/config/dataSource';
+import { ThrottlerProvider } from '@src/shared/providers/throttler/throttler.provider';
+import { UserModule } from '@src/users/users.module';
 
 @Module({
   imports: [
@@ -20,8 +22,9 @@ import { dataSourceOptions } from '@src/config/dataSource';
         limit: 20,
       },
     ]),
+    UserModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [ThrottlerProvider],
 })
 export class AppModule {}
